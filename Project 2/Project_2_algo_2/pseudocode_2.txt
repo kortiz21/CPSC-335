@@ -1,0 +1,55 @@
+// run length encoding to compress a string
+function string encoding(string n)
+input:
+parameter 1: string n to be encoded
+output: 
+return the encoded string kx
+
+function int main()
+    let string run1 = ddd
+    let string run2 = heloooooooo there
+    let string run3 = choosemeeky and tuition-free
+    print String run1 becomes encoding(run1)
+    print String run2 becomes encoding(run2)
+    print String run3 becomes encoding(run3)
+    return 0
+
+function string encoding(string n)
+    let string kx = the encoded string
+    let string alphabet = all char that have been visited
+
+    // loop through every element in passed in string n
+    for each element i in string n do
+        let size_t found = alphabet.find(n[i])
+        let int counter = 1 // track number of times char is visited
+
+        // not found in our alphabet so adding to it
+        if found = npos then
+            alphabet += n[i] // add to string
+
+        // a space was found indicating a new word, resetting list
+        if n[i] = ' ' then
+            alphabet = "" //empty string
+        
+        // search for char in string n
+        for each element j in string n do
+            //A space was found, breaking from loop
+            if n[j] = ' ' then
+                break
+            
+            if n[i] = n[j] then
+                increment counter
+            
+            //Next element is not the same, exiting loop
+            if n[j] != n[j+1] then
+                break
+        
+        if counter = 1 then
+            kx = kx + n[i]
+        
+        else
+            kx = kx + to_string(counter) + n[i]
+        
+        //move to next string position
+        i += counter-1
+    return kx

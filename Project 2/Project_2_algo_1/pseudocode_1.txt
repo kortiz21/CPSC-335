@@ -1,0 +1,124 @@
+function map<int, map<int,string>> get_target_indexs()
+input:
+NO PARAMETERS
+output: 
+print indices for target words and actual target words
+
+function void print(myMap)
+input:
+parameter 1: map of int and map int and string myMap
+output:
+prints map 0f maps
+
+function int main
+
+    map<int, map<int,string>> meeting_times
+    meeting_times = get_target_indices()
+    print The available meetings time are:
+    print(meeting_times)
+
+return 0
+
+function void print(map <int, map<int,string>>myMap)
+// print map<int, map<int, string> > map of maps that is passed in by reference myMap
+void print(map<int,map<int,string>> &myMap) 
+    map<int, map<int,string>> iterator itr1
+    map<int,string> iterator itr2
+ 
+    for each element map in my map of maps do
+        for each key, value in map do
+            if itr2 = itr1->second.begin() then
+                print Output_order = [
+            if next(itr2) = itr1->second.end() then
+                print itr2->first
+            else
+                print itr2->first with comma
+        for each key, value in map do
+            if itr2 = itr1->second.begin() then
+                print Output_array = [
+            if next(itr2) = itr1->second.end() then
+                print itr2->second
+            else
+                print itr2->second with comma         
+
+function map<int, map<int,string>> get_target_indexs(target)
+    // declaring arrays to be used
+    array<string,1>cities_1
+    array<string,1>cities_2
+    array<string,1>cities_3
+    array<string,4>target_1
+    array<string,4>target_2
+    array<string,4>target_3
+
+    let string line = line in myfile
+    ifstream myfile(in2a.txt)
+
+    if myfile is open then
+        let array_counter = track arrays
+        while get each line in myfile
+            let string parse_line = string after parsing
+            let int start_pos = start position to read in characters
+            for each element i in line do
+                if line[i] = [
+                    start_pos = i
+                    array_counter increment
+                    break for loop
+            let comma_counter = track commas
+            for each element i in line do
+                if isalpha(line[i]) and line[start_pos] = [ then
+                    parse_line += line[i]
+
+                if line[i+1] = , then
+                    if array_counter = 2 then
+                        target_1[comma_counter] = parse_line
+                    if array_counter = 4 then
+                        target_2[comma_counter] = parse_line
+                    if array_counter = 6 then
+                        target_3[comma_counter] = parse_line
+                    comma_counter increment
+                    parse_line = reset to empty string
+
+                if line[i] = ] then
+                    if array_counter = 1 then
+                        cities_1[0] = parse_line
+                        break for loop
+                    if array_counter = 2 then
+                        target_1[comma_counter] = parse_line;
+                        break for loop
+                    if array_counter = 3 then
+                        cities_2[0] = parse_line
+                        break for loop
+                    if array_counter = 4 then
+                        target_2[comma_counter] = parse_line
+                        break for loop
+                    if array_counter = 5 then
+                        cities_3[0] = parse_line
+                        break for loop
+                    if array_counter = 6 then
+                        target_3[comma_counter] = parse_line
+                        break for loop        
+    myfile.close()
+
+    map<int,string> indices_1
+    map<int,string> indices_2
+    map<int,string> indices_3
+
+    let index = position of current index
+
+    for each i in target_n do
+        if cities_1[0].find(target_1[i]) then
+            index = cities_1[0].find(target_1[i])
+            indices_1.insert(pair<int,string>(index, target_1[i]))
+        if cities_2[0].find(target_2[i]) then
+            index = cities_2[0].find(target_2[i])
+            indices_2.insert(pair<int,string>(index, target_2[i]))
+        if cities_3[0].find(target_3[i]) then
+            index = cities_3[0].find(target_3[i])
+            indices_3.insert(pair<int,string>(index, target_3[i]))
+    // create a map of maps
+    map<int, map<int,string>> indices
+
+    indices.insert(pair<int,map<int,string>>(0,indices_1))
+    indices.insert(pair<int,map<int,string>>(1,indices_2))
+    indices.insert(pair<int,map<int,string>>(2,indices_3))
+    return indices

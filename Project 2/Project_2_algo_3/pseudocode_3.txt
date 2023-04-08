@@ -1,0 +1,103 @@
+
+// merge all passed in vector and sort in ascending order
+function vector<vector<int>> merge(int size_of_vector, int size_of_array)
+input:
+parameter 1: int size_of_vector number of arrays within the vector of vector
+parameter 2: int size_of_array number of arrays in file
+output: 
+return the merged list vector of vector int
+
+// print 2D vector
+function void print2D(vector<vector<int>> myVector)
+input:
+parameter 1: vector of a vector int myVector
+output: 
+print the 2D vector
+
+// main driver
+int main()
+    vector<vector<int>> merged_list
+    let merged_list = merge(4,3) pass in size's of vector and array
+    print2D(merged_list)
+    return 0
+
+// print 2D vector
+function void print2D(vector<vector<int>> myVector)
+    for each element i in myVector do
+        for each elemnt j in myVector[i] do
+            if j+1 = myVector[i].size then 
+                print myVector[i][j]
+            else
+                print myVector[i][j]  
+
+// merge all passed in vector and sort in ascending order
+vector<vector<int>> merge(int size_of_vector, int size_of_array)
+    vector<vector<int>> fvector (size_of_vector)
+    vector<vector<vector<int>>> list
+
+    string line
+
+    ifstream myfile("in2c.txt")
+
+    if myfile.is_open then
+        let int vector_counter = -1 to track vector position in index
+
+        while getline(myfile, line) do
+            let string parse_line = empty string
+            let int start_pos = 0
+
+            for each element i in line do
+                if line[i] = [ and line[i+1] = ' ' then
+                    start_pos = i + 3
+                    vector_counter incremenent
+                    break
+
+               if line[i] = [ and line[i+1] != ' ' then
+                    start_pos = i + 1
+                    vector_counter incremenent 
+                    break
+
+            let int number = number being pushed into vector
+            for each element i in line do
+                if line[i] = - then
+                    parse_line = -
+                
+                if isdigit(line[i]) then
+                    parse_line += line[i]
+                
+                if line[i+1] = , then
+                    number = stoi(parse_line)
+                    fvector.at(vector_counter).push_back(number)
+                    parse_line = empty string
+                
+                if line[i] = ] and line[i+1] = , then
+                    break       
+                if line[i] = ] and line[i+1] = ' '
+                    number = stoi(parse_line)
+                    fvector.at(vector_counter).push_back(number)
+                    parse_line = empty string
+                    list.push_back(fvector)
+                    // reset values of fvector and counter
+                    fvector.clear()
+                    vector_counter = -1
+                    fvector.resize(size_of_vector)
+                    break          
+    myfile.close()
+    vector<vector<int>> myVector
+    vector<vector<int>> smallest (size_of_array)
+    for each element k in my list of vectors do
+        // copy that vector of vector into myVector
+        myVector = list.at(k)
+        for each element i in myVector do
+            let int min = myVector[0][0] where the first element in vector of vector is set to min
+            let int pos = 0 where min is found
+            for each element j+1 in myVector do
+                if min > myVector[j][0] then
+                    min = myVector[j][0]
+                    pos = j
+            smallest.at(k).push_back(min)
+            myVector.at(pos).erase(myVector.at(pos).begin())
+            if myVector.at(pos) is empty then
+                myVector.erase(myVector.begin() + pos)
+            i = 0
+    return smallest

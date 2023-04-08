@@ -1,0 +1,52 @@
+
+declare int get_index() function
+
+int main() function
+
+let int preferred_starting_city = preferred starting city
+preferred_starting_city = get_index() function
+
+output "The preferred starting city is " preferred_starting_city
+return 0
+
+int get_index() function no parameters
+
+declare and initialize all variables 
+
+let int index = 0, index to return to function
+let int array distances size 5 = 5,25,15,10,15, distances  between neighboring cities
+let int array gas size 5 = 1,2,1,0,3, gas amount in all gas stations in the city
+let int mpg = 10, miles per gallon of car
+let int tank = 0, gas tank of car
+let int miles = 0, miles to traverse in car
+let int end = 1, ends while loop to go through all city possibilities
+let int counter = 0, counter for the while loop
+
+while end does not = 1
+    for each element in i
+        let tank = tank + element in gas
+        let miles = miles + (tank * mpg)
+        if( miles < element in distances)
+            output "Not enough gas in tank, city i is no preferred starting city"
+            break
+        let miles = miles - element in distances
+        let tank = tank - element in gas
+        if ( i + 1 = size of distances) then let index = counter
+    
+    let int array temp_distances size 5  hold distances array to change distances array order
+    let int array temp_gas size 5 hold gas array to change gas array order
+
+    for each element in i
+        let element in temp_distances = element in distances
+        let element in temp_gas = element in gas
+        if ( i + 1 = size of distances) then
+            let element in distances = element in temp_distances[size of temp_distances - elemenet - offset of 1]
+            let element in gas = element in temp_gas[size of temp_gas - element - offset of 1]
+            break
+        let element in distances = element in distances + 1
+        let element in gas = element in gas + 1
+    increment counter by 1
+    reset value of tank to 0
+    reset value of miles to 0
+    if ( counter = size of distances) then let end = 1 to exit while loop
+return index
