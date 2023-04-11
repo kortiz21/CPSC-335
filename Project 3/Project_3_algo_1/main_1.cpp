@@ -1,39 +1,89 @@
-// Kevin E Ortiz
+// Kevin E Ortiz and Oscar Cisneros
 // Algorithm 1: Soccer Opponent Avoidance - Exhaustive Search
 // CPSC 335 Tuesday 7:00 PM to 9:45 PM
 // Submitted: 4/21/23
 #include <iostream>
-#include <array>
+#include <vector>
+#include <cmath>
+#include <string>
 
 using namespace std;
-
+// function prototype
+// returns the number of paths that reach the end of the grid
+// @param: grid - 2D vector of char
+// return: int - number of paths that reach the end of the grid
+int soccer_exhaustive(vector<vector<char>> grid);
 // main driver
 int main()
 {
-    // declare variables
-    // 2D array of 8 rows and 9 columns
-    // start of the soccer game is at grid[0][0]
-    // end of the soccer game is at grid[7][8]
-    // player can only move right or down by 1 space
-    // player cannot move to a space that has an X
-    // player cannot move to a space that is out of bounds
-    // player cannot move to a space that has already been visited
-    // player must move to the end of the grid
-    // their are 2 teams, Blue Team and Red Team
-    // Blue Team is represented by the letter X
-    // Red Team is represented by the letter .
-    // moving down involves (row + 1, col)
-    // moving right involves (row, col + 1)
-    // keep a counter of number of paths that reach the end of the grid
-    // once a path reaches the end of the grid, store the path
-    
-    array<array<char, 9>, 8> grid{{{'.', '.', '.', '.', '.', '.', 'X', '.', 'X'},
-                                   {'X', '.', '.', '.', '.', '.', '.', '.', '.'},
-                                   {'.', '.', '.', 'X', '.', '.', '.', 'X', '.'},
-                                   {'.', '.', 'X', '.', '.', '.', '.', 'X', '.'},
-                                   {'.', 'X', '.', '.', '.', '.', 'X', '.', '.'},
-                                   {'.', '.', '.', '.', 'X', '.', '.', '.', '.'},
-                                   {'.', '.', 'X', '.', '.', '.', '.', '.', 'X'},
-                                   {'.', '.', '.', '.', '.', '.', '.', '.', '.'}}};
+    // variable declaration
+    // grid: type 2D vector of char - soccer field
+    vector<vector<char>> grid{{{'.', '.', '.', '.', '.', '.', 'X', '.', 'X'},
+                               {'X', '.', '.', '.', '.', '.', '.', '.', '.'},
+                               {'.', '.', '.', 'X', '.', '.', '.', 'X', '.'},
+                               {'.', '.', 'X', '.', '.', '.', '.', 'X', '.'},
+                               {'.', 'X', '.', '.', '.', '.', 'X', '.', '.'},
+                               {'.', '.', '.', '.', 'X', '.', '.', '.', '.'},
+                               {'.', '.', 'X', '.', '.', '.', '.', '.', 'X'},
+                               {'.', '.', '.', '.', '.', '.', '.', '.', '.'}}};
+    // result: type int - number of paths that reach the end of the grid
+    int result = soccer_exhaustive(grid);
+    cout << "The number of different paths to cross the field: " << result << std::endl;
     return 0;
+}
+// function definition
+// returns the number of paths that reach the end of the grid
+// @param: grid - 2D vector of char
+// return: int - number of paths that reach the end of the grid
+int soccer_exhaustive(vector<vector<char>> grid)
+{
+    // variable declaration
+    // r: type int - number of rows in grid
+    int r = 8;
+    // c: type int - number of columns in grid
+    int c = 9;
+    // len: type int - length of the path
+    int len = r + c - 2;
+    // counter: type int - number of valid paths in grid
+    int counter = 0;
+    // for bits from 0 to 2^len - 1 inclusive
+    for (int bits = 0; bits <= (pow(2, len) - 1); bits++)
+    {
+        // variable declaration
+        // candidate: type vector<char> - empty list of moves
+        vector<char> candidate;
+        // row: type int - row index
+        int row = 0;
+        // col: type int - column index
+        int col = 0;
+        // for k from 0 to len - 1 inclusive
+        for (int k = 0; k <= (len - 1); k++)
+        {
+            // variable declaration
+            // bit: type int - bit at index k
+            int bit = (bits >> k) & 1;
+            // if bit is 1, move right
+            if (bit == 1)
+            {
+                candidate.push_back('r');
+                col++;
+            }
+            // if bit is 0, move down
+            else
+            {
+                candidate.push_back('d');
+                row++;
+            }
+            // if the candidate goes outside of the grid or the candidate hits an X break
+            if (row >= r || col >= c || grid[row][col] == 'X')
+                break;
+            // if the candidate reaches the end of the grid (r-1, c-1), increment counter
+            if ((row == r - 1) && (col == c - 1))
+            {
+                counter++;
+                break;
+            }
+        }
+    }
+    return counter;
 }
